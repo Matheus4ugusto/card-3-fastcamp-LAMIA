@@ -31,3 +31,22 @@ def validate(data: dict[str, Any]) -> None:
         user = User.model_validate(data)
         print(user)
     except ValidationError as e:
+        print("User is invalid")
+        for error in e.errors():
+            print(error)
+
+
+def main() -> None:
+    good_data = {
+        "name": "Arjan",
+        "email": "example@arjancodes.com",
+        "password": "Password123",
+    }
+    bad_data = {"email": "<bad data>", "password": "<bad data>"}
+
+    validate(good_data)
+    validate(bad_data)
+
+
+if __name__ == "__main__":
+    main()
